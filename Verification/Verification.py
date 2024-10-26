@@ -17,7 +17,6 @@ class Verification():
     def verify_web(self, url):
         user_data = {
             "name": "",
-            "second_name": "",
             "year": ""
         }
         options = Options()
@@ -27,9 +26,7 @@ class Verification():
         driver.get(url)
         name = driver.find_element(By.XPATH, '/html/body/div/div/div[2]/div/div/div/div[1]/div[6]/div[2]').get_attribute('innerHTML')
         year = driver.find_element(By.XPATH, '/html/body/div/div/div[2]/div/div/div/div[1]/div[11]').get_attribute('innerHTML')
-        first_name, second_name = name.split(' ')
-        user_data['name'] = first_name
-        user_data['second_name'] = second_name
+        user_data['name'] = name
         user_data['year'] = re.sub(r'[\t\n\.]', '', year).split(' ')[::-1][0]
         print(user_data)
         driver.quit()
