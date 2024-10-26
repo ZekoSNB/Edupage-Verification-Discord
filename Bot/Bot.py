@@ -5,7 +5,7 @@ class Bot():
     def __init__(self):
         intents = discord.Intents.default()
         intents.members = True
-        # intents.messages_content = True
+        intents.message_content = True
         self.client = discord.Client(intents = intents)
         self.client.event(self.on_ready)
         self.client.event(self.on_member_join)
