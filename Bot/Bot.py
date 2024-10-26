@@ -4,8 +4,12 @@ import json
 
 class Bot():
     def __init__(self):
-        self.client = discord.Client(intents = discord.Intents.default())
+        intents = discord.Intents.default()
+        intents.members = True
+        intents.messages_content = True
+        self.client = discord.Client(intents = intents)
         self.client.event(self.on_ready)
+        self.client.event(self.on_member_join)
         self.client.run(self.get_token())
 
     def get_token(self):
@@ -15,6 +19,18 @@ class Bot():
     
     async def on_ready(self):
         print(f'We have logged in as {self.client.user}')
+
+    async def on_member_join(self, member):
+        print("sending...")
+        try:
+            await member.send(f'Welcome to the server {member}')
+            print(f"message sent to {member}")
+        except discord.Forbidden:
+            print(f'Could not send a message to {member}')
+        except Exception as e:
+            print(f'An error occured: {e}')
+
+    
 
 
 
