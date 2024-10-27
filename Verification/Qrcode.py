@@ -20,7 +20,6 @@ class Qrcode():
                 return data
             return None
         except Exception as e:
-            print(e)
             return None
     
     def invert_image(self, image:str) -> str:

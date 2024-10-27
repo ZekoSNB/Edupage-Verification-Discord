@@ -81,7 +81,12 @@ class Bot():
         #check if DM attachment
         if isinstance(message.channel, discord.DMChannel) and message.attachments:
             await message.channel.send(f"Sprava prijata, overujem...")
-           #download images
+
+            #download images
+            if len(message.attachments) > 1:
+                await message.channel.send("Posielaj len jednu fotku naraz :x:")
+                return
+            
             for i,attachment in enumerate(message.attachments):
                 if attachment.content_type and 'image' in attachment.content_type:
                     filename = f'{str(message.author)}-{i}.{attachment.filename.split('.')[-1]}'
@@ -89,6 +94,9 @@ class Bot():
                     member_status = self.verification.verify(filename)
                     if member_status['STATUS']:
                         await message.channel.send(f"Člen {member_status['NAME']} je študentom a si verifikovaný. :white_check_mark:")
+                    else:
+                        await message.channel.send(f"Nastala chyba {member_status['ERROR']} a nie si verifikovaný :x: :cry:")
+                    self.delete_image(filename)
 
     #download image
     async def download_image(self, url: str, filename: str) -> None:
@@ -99,6 +107,10 @@ class Bot():
                     file_path = os.path.join(self.BASE_DIR, 'images', filename)
                     with open(file_path, "wb") as f:
                         f.write(image_data)
+    
+    def delete_image(self, filename: str) -> None:
+        file_path = os.path.join(self.BASE_DIR, 'images', filename)
+        os.remove(file_path)
 
 if __name__ == '__main__':
     Bot()

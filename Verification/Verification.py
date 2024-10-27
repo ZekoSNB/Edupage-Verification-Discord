@@ -23,7 +23,10 @@ class Verification():
             edu_data = self.edu.check(student_data)
             return edu_data
         else:
-            print('No data found in the QR code')
+            return {
+                "STATUS": False,
+                "ERROR": "QR Code not found"
+            } 
     
     def verify_web(self, url: str) -> dict:
         user_data = {
@@ -46,8 +49,3 @@ class Verification():
     def get_data(self) -> dict:
         with open(os.path.join(self.BASE_DIR, 'data', 'data.json'), 'r') as f:
             return json.load(f)
-        
-if __name__ == '__main__':
-    V = Verification()
-    V.verify('qrcodetest.jpeg')
-    V.verify('radkotest.jpeg')

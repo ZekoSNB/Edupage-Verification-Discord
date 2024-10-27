@@ -35,7 +35,8 @@ class Edu:
                     'NAME': student.name,
                     "ID": student.person_id,
                     "CLASS_ID": student.class_id,
-                    "CLASS": self.get_class(student.class_id)
+                    "CLASS": self.get_class(student.class_id),
+                    "ERROR": None
                 }
         return {
             "STATUS": False,
