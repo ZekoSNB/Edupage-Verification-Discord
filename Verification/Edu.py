@@ -1,6 +1,5 @@
 from edupage_api import Edupage
-import json
-
+import json, os, datetime
 
 class Edu:
     def __init__(self, user, passw) -> None:
@@ -12,20 +11,26 @@ class Edu:
             return False
         students = self.edupage.get_students()
         for student in students:
+
             if student.name == data['name']:
-                print(student.name)
-                return True
+                print(student.class_id)
+                return {
+                    "STATUS": True,
+                    "ID": student.person_id,
+                    "CLASS_ID": student.class_id
+                }
+        return False
+
+    def get_class(self, student):
+        classes = self.edupage.get_classes()
+        for class_ in classes:
+            if class_.class_id == student['CLASS_ID']:
+                return class_.name
             
+
 if __name__ == "__main__":
-    with open('/home/zekousek/Documents/Edupage-Verification-Discord/data/data.json', 'r') as file:
+    file_path = os.path.join(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')), 'data', 'data.json')
+    with open(file_path, 'r') as file:
         data = json.load(file)
     edu = Edu(data["EDU_LOGIN"], data["EDU_PASSWORD"])
-    print(edu.check({
-        "name": "Test Test",
-        "year": "2024/2025"
-    }))
-    print(edu.check({
-        "name": "Test Test",
-        "year": "2023/2024"
-    }))
-        
+    
