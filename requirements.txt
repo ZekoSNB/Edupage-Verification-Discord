@@ -1,4 +1,4 @@
-open-cv
+opencv-python
 os
 discord
 json
