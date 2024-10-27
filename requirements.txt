@@ -1,0 +1,6 @@
+open-cv
+os
+discord
+json
+edupage-api
+selenium
