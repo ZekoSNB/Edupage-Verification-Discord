@@ -1,7 +1,7 @@
 import discord
 import os
 import json
-
+import aiohttp
 
 class Bot():
     def __init__(self):
@@ -14,6 +14,7 @@ class Bot():
         self.client.event(self.on_ready)
         self.client.event(self.on_member_join)
         self.client.run(self.get_token())
+        self.client.event(self.on_message)
 
     def get_bot_data(self):
         with open(os.path.join(self.BASE_DIR, 'Bot', 'Bot_data.json'), 'r') as file:
@@ -43,6 +44,32 @@ class Bot():
         except Exception as e:
             print(f'An error occured: {e}') 
 
+    #receive message
+    async def on_message(self, message):
+        if message.author == self.client.user:
+            return
+
+        #only if attachments from DM
+        if isinstance(message.channel, discord.DMChannel) and message.attachments:
+            print(f'{message.author} sent a message: {message.content}, {len(message.attachments)} attachments available')
+            await message.channel.send(f"Sprava '{message.content}' prijata, {len(message.attachments)} obrazkov.")
+           
+           #download images
+            for attachment in message.attachments:
+                if attachment.content_type and 'image' in attachment.content_type:
+                    print(f"Image '{attachment.filename}' is downloading.")
+                    await self.download_image(attachment.url, attachment.filename)
+                    await message.channel.send(f"Image '{attachment.filename}' has been downloaded.")
+
+    #download image
+    async def download_image(self, url, filename):
+        async with aiohttp.ClientSession() as session:
+            async with session.get(url) as response:
+                if response.status == 200:
+                    image_data = await response.read()
+                    with open(filename, "wb") as f:
+                        f.write(image_data)
+                    print(f"'{filename}' downloaded.")
 
 if __name__ == '__main__':
     Bot()
