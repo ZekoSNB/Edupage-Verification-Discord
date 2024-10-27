@@ -3,11 +3,13 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
-import re
+import re, os
 
 
 class Verification():
-        
+    def __init__(self) -> None:
+        self.BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+
     def verify(self, image):
         Qr = Qrcode()
         Qr_data = Qr.read(image)
@@ -21,7 +23,8 @@ class Verification():
         }
         options = Options()
         options.add_argument('--headless=new')
-        service = Service('/home/zeko/Documents/Edupage-Verification-Discord/data/chromedriver')
+        chrome_driver = os.path.join(self.BASE_DIR, 'data', 'chromedriver')
+        service = Service(chrome_driver)
         driver = webdriver.Chrome(service=service, options=options)
         driver.get(url)
         name = driver.find_element(By.XPATH, '/html/body/div/div/div[2]/div/div/div/div[1]/div[6]/div[2]').get_attribute('innerHTML')
@@ -32,9 +35,3 @@ class Verification():
         driver.quit()
 
 
-if __name__ == '__main__':
-    V = Verification()
-    V.verify('/home/zeko/Documents/Edupage-Verification-Discord/data/download.png')
-    V.verify('/home/zeko/Documents/Edupage-Verification-Discord/data/qrcodetest.png')
-    V.verify('/home/zeko/Documents/Edupage-Verification-Discord/data/samkotest.jpeg')
-    V.verify('/home/zeko/Documents/Edupage-Verification-Discord/data/radko.jpeg')

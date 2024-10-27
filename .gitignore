@@ -3,3 +3,5 @@ data.zip
 __pycache__
 Bot2.py
 test.py
+images/*
+!images/.gitkeep

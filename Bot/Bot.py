@@ -3,10 +3,26 @@ import os
 import json
 import aiohttp
 
+
+
+# A Discord bot class that handles various events such as member joining, message receiving, and image downloading.
+# Attributes:
+#     BASE_DIR (str): The base directory of the bot.
+#     bot_data (dict): The bot's configuration data loaded from a JSON file.
+#     client (discord.Client): The Discord client instance with specified intents.
+# Methods:
+#     __init__(): Initializes the bot, sets up permissions, and starts the bot.
+#     get_bot_data(): Loads and returns the bot's configuration data from a JSON file.
+#     get_token(): Retrieves the bot token from a JSON file.
+#     on_ready(): Event handler for when the bot is ready.
+#     on_member_join(member): Event handler for when a new member joins the server.
+#     on_message(message): Event handler for when a message is received.
+#     download_image(url, filename): Downloads an image from a given URL and saves it to a specified filename.
 class Bot():
+    
 
     #initialize bot
-    def __init__(self):
+    def __init__(self) -> None:
         self.BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
         self.bot_data = self.get_bot_data()
 
@@ -25,66 +41,60 @@ class Bot():
 
 
     #get needed information from .json
-    def get_bot_data(self):
+    def get_bot_data(self) -> dict:
         with open(os.path.join(self.BASE_DIR, 'Bot', 'Bot_data.json'), 'r') as file:
             return json.load(file)
 
     #get bot token from .json file
-    def get_token(self):
+    def get_token(self) -> str:
         file_path = os.path.join(self.BASE_DIR, 'data', 'data.json')
         with open(file_path, 'r') as file:
             return json.load(file)['BOT_TOKEN']
     
     #check if bot is online
-    async def on_ready(self):
+    async def on_ready(self) -> None:
         print(f'We have logged in as {self.client.user}')
 
     #detect member join and send welcome mesage
-    async def on_member_join(self, member):
-
+    async def on_member_join(self, member: discord.Member) -> None:
         WELCOME_MSG = self.bot_data['WELCOME_MSG']
         PC_MSG = "Ak overenie robíš na PC/Laptope: :computer:"
         MOBILE_MSG = "Ak overenie robíš na mobile: :iphone:"
         PC_IMG = os.path.join(self.BASE_DIR, 'Bot', self.bot_data['PC_IMG'])
         MOBILE_IMG = os.path.join(self.BASE_DIR, 'Bot', self.bot_data['MOBILE_IMG'])
-
-        print(f"Sending message to {member}...")
         try:
             await member.send(f"{WELCOME_MSG} \n\n {PC_MSG} \n {MOBILE_MSG}" , files = [discord.File(PC_IMG), discord.File(MOBILE_IMG)])
+
         except discord.Forbidden:
             print(f'Could not send a message to {member}')
+
         except Exception as e:
             print(f'An error occured: {e}') 
 
     #detect message receive
-    async def on_message(self, message):
+    async def on_message(self, message: discord.Message) -> None:
         if message.author == self.client.user:
             return
 
         #check if DM attachment
         if isinstance(message.channel, discord.DMChannel) and message.attachments:
-            print(f'{message.author} sent a message: {message.content}, {len(message.attachments)} attachments available')
             await message.channel.send(f"Sprava '{message.content}' prijata, {len(message.attachments)} obrazkov.")
-           
            #download images
             for i,attachment in enumerate(message.attachments):
                 if attachment.content_type and 'image' in attachment.content_type:
-                    print(f"Image '{attachment.filename}' is downloading.")
-                    print(attachment.filename, message.author)
                     filename = f'{str(message.author)}-{i}.{attachment.filename.split('.')[-1]}'
-                    print(filename)
                     await self.download_image(attachment.url, filename)
                     await message.channel.send(f"Image '{attachment.filename}' has been downloaded.")
 
     #download image
-    async def download_image(self, url, filename):
+    async def download_image(self, url: str, filename: str) -> None:
         async with aiohttp.ClientSession() as session:
             async with session.get(url) as response:
                 if response.status == 200:
                     image_data = await response.read()
-                    with open(filename, "wb") as f:
+                    file_path = os.path.join(self.BASE_DIR, 'images', filename)
+                    with open(file_path, "wb") as f:
                         f.write(image_data)
-                    print(f"'{filename}' downloaded.")
 
 if __name__ == '__main__':
     Bot()
