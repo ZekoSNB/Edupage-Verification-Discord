@@ -111,6 +111,3 @@ class Bot():
     def delete_image(self, filename: str) -> None:
         file_path = os.path.join(self.BASE_DIR, 'images', filename)
         os.remove(file_path)
-
-if __name__ == '__main__':
-    Bot()
