@@ -19,6 +19,7 @@ import aiohttp
 #     on_member_join(member): Event handler for when a new member joins the server.
 #     on_message(message): Event handler for when a message is received.
 #     download_image(url, filename): Downloads an image from a given URL and saves it to a specified filename.
+#     delete_image(filename): Deletes an image with a specified filename.
 class Bot():
     
 
