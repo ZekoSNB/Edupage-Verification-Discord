@@ -11,10 +11,11 @@ Edupage Verifikácia v Discorde je Discord bot navrhnutý na automatizáciu proc
 
 ## Obsah
 
-- [Inštalácia](#inštalácia)
-- [Konfigurácia](#konfigurácia)
-- [Použitie](#použitie)
-- [Licencia](#licencia)
+- [Inštalácia](#Inštalácia)
+- [Konfigurácia](#Konfigurácia)
+- [Použitie](#Použitie)
+- [Licencia](#Licencia)
+- [Poďakovanie](#Poďakovanie)
 
 ## Inštalácia
 
@@ -24,7 +25,7 @@ Edupage Verifikácia v Discorde je Discord bot navrhnutý na automatizáciu proc
 2. **Knižnica Discord.py**
 3. **Prístup k API Edupage** (alebo obdobný systém overenia školy)
    
-### Nastavenie
+### Konfigurácia
 
 1. Klonujte repozitár:
    ```bash
