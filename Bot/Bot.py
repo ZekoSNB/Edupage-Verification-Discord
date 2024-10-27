@@ -27,6 +27,7 @@ class Bot():
     def __init__(self) -> None:
         self.BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
         self.bot_data = self.get_bot_data()
+        self.roles = self.get_roles()
         self.verification = Verification()
 
         #giving bot permissions
@@ -47,6 +48,11 @@ class Bot():
     def get_bot_data(self) -> dict:
         with open(os.path.join(self.BASE_DIR, 'Bot', 'Bot_data.json'), 'r') as file:
             return json.load(file)
+        
+    def get_roles(self) -> dict:
+        with open(os.path.join(self.BASE_DIR, 'Bot', 'Roles.json'), 'r') as file:
+            return json.load(file)
+
 
     #get bot token from .json file
     def get_token(self) -> str:
@@ -95,9 +101,49 @@ class Bot():
                     member_status = self.verification.verify(filename)
                     if member_status['STATUS']:
                         await message.channel.send(f"Člen {member_status['NAME']} je študentom a si verifikovaný. :white_check_mark:")
+
+                        # Add role after verification
+                        guild = discord.utils.get(self.client.guilds)
+                        await self.add_role_to_member(guild, message.author, self.roles[member_status['CLASS']])
+                        # Set nickname after verification
+                        await self.set_member_nickname(guild, message.author, member_status['NAME'])
+
                     else:
                         await message.channel.send(f"Nastala chyba {member_status['ERROR']} a nie si verifikovaný :x: :cry:")
                     self.delete_image(filename)
+        
+    async def add_role_to_member(self, guild: discord.Guild, member: discord.User, role_name: str) -> None:
+        role = discord.utils.get(guild.roles, name=role_name)
+        if role is None:
+            print(f"Role '{role_name}' not found.")
+            return
+        
+        guild_member = guild.get_member(member.id)
+        if guild_member is None:
+            print(f"User {member} not found in the guild.")
+            return
+
+        try:
+            await guild_member.add_roles(role)
+
+        except discord.Forbidden:
+            print("Bot does not have permission to assign roles.")
+        except Exception as e:
+            print(f"Failed to assign role due to an exception: {e}")
+
+    async def set_member_nickname(self, guild: discord.Guild, member: discord.User, nickname: str) -> None:
+        guild_member = guild.get_member(member.id)
+        if guild_member is None:
+            print(f"User {member} not found in the guild.")
+            return
+
+        try:
+            await guild_member.edit(nick=nickname)
+
+        except discord.Forbidden:
+            print("Bot does not have permission to manage nicknames.")
+        except Exception as e:
+            print(f"Failed to set nickname due to an exception: {e}")
 
     #download image
     async def download_image(self, url: str, filename: str) -> None:
