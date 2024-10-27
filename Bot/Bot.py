@@ -13,8 +13,9 @@ class Bot():
         self.client = discord.Client(intents = intents)
         self.client.event(self.on_ready)
         self.client.event(self.on_member_join)
-        self.client.run(self.get_token())
         self.client.event(self.on_message)
+        self.client.run(self.get_token())
+        
 
     def get_bot_data(self):
         with open(os.path.join(self.BASE_DIR, 'Bot', 'Bot_data.json'), 'r') as file:
@@ -55,10 +56,13 @@ class Bot():
             await message.channel.send(f"Sprava '{message.content}' prijata, {len(message.attachments)} obrazkov.")
            
            #download images
-            for attachment in message.attachments:
+            for i,attachment in enumerate(message.attachments):
                 if attachment.content_type and 'image' in attachment.content_type:
                     print(f"Image '{attachment.filename}' is downloading.")
-                    await self.download_image(attachment.url, attachment.filename)
+                    print(attachment.filename, message.author)
+                    filename = f'{str(message.author)}-{i}.{attachment.filename.split('.')[-1]}'
+                    print(filename)
+                    await self.download_image(attachment.url, filename)
                     await message.channel.send(f"Image '{attachment.filename}' has been downloaded.")
 
     #download image
