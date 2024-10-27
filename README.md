@@ -40,3 +40,10 @@ Edupage Verifikácia v Discorde je Discord bot navrhnutý na automatizáciu proc
 
 ### Použitie
 1. ```python bot.py```
+2. Bot automaticky počúva na pripojenie nových členov a vyzve ich na dokončenie procesu overenia pomocou potvrdenia z Edupage.
+
+## Licencia
+Distribuované pod licenciou GPL v3.0 . Viac informácií nájdete v súbore LICENSE.
+
+## Poďakovanie
+Špeciálne poďakovanie patrí Edupage za poskytovanie systému overovania a všetkým prispievateľom, ktorí pomáhajú vylepšovať tento projekt.
