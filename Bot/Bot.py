@@ -1,3 +1,4 @@
+from Verification.Verification import Verification
 import discord
 import os
 import json
@@ -25,6 +26,7 @@ class Bot():
     def __init__(self) -> None:
         self.BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
         self.bot_data = self.get_bot_data()
+        self.verification = Verification()
 
         #giving bot permissions
         intents = discord.Intents.default()
@@ -78,13 +80,15 @@ class Bot():
 
         #check if DM attachment
         if isinstance(message.channel, discord.DMChannel) and message.attachments:
-            await message.channel.send(f"Sprava '{message.content}' prijata, {len(message.attachments)} obrazkov.")
+            await message.channel.send(f"Sprava prijata, overujem...")
            #download images
             for i,attachment in enumerate(message.attachments):
                 if attachment.content_type and 'image' in attachment.content_type:
                     filename = f'{str(message.author)}-{i}.{attachment.filename.split('.')[-1]}'
                     await self.download_image(attachment.url, filename)
-                    await message.channel.send(f"Image '{attachment.filename}' has been downloaded.")
+                    member_status = self.verification.verify(filename)
+                    if member_status['STATUS']:
+                        await message.channel.send(f"Člen {member_status['NAME']} je študentom a si verifikovaný. :white_check_mark:")
 
     #download image
     async def download_image(self, url: str, filename: str) -> None:

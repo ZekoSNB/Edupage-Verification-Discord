@@ -1,5 +1,5 @@
-from Qrcode import Qrcode
-from Edu import Edu
+from Verification.Qrcode import Qrcode
+from Verification.Edu import Edu
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
@@ -21,11 +21,7 @@ class Verification():
         if Qr_data:
             student_data = self.verify_web(Qr_data)
             edu_data = self.edu.check(student_data)
-            if edu_data['STATUS']:
-                print(edu_data)
-                print(self.edu.get_class(edu_data))
-            else:
-                print(edu_data)
+            return edu_data
         else:
             print('No data found in the QR code')
     
@@ -40,11 +36,11 @@ class Verification():
         service = Service(chrome_driver)
         driver = webdriver.Chrome(service=service, options=options)
         driver.get(url)
-        name = driver.find_element(By.XPATH, '/html/body/div/div/div[2]/div/div/div/div[1]/div[6]/div[2]').get_attribute('innerHTML')
+        user_data['NAME'] = driver.find_element(By.XPATH, '/html/body/div/div/div[2]/div/div/div/div[1]/div[6]/div[2]').get_attribute('innerHTML')
         year = driver.find_element(By.XPATH, '/html/body/div/div/div[2]/div/div/div/div[1]/div[11]').get_attribute('innerHTML')
-        user_data['NAME'] = name
         user_data['YEAR'] = re.sub(r'[\t\n\.]', '', year).split(' ')[::-1][0]
         driver.quit()
+        
         return user_data
 
     def get_data(self) -> dict:
@@ -54,4 +50,4 @@ class Verification():
 if __name__ == '__main__':
     V = Verification()
     V.verify('qrcodetest.jpeg')
-
+    V.verify('radkotest.jpeg')

@@ -34,17 +34,18 @@ class Edu:
                     "STATUS": True,
                     'NAME': student.name,
                     "ID": student.person_id,
-                    "CLASS_ID": student.class_id
+                    "CLASS_ID": student.class_id,
+                    "CLASS": self.get_class(student.class_id)
                 }
         return {
             "STATUS": False,
             "ERROR": "Meno sa nenašlo"
         }
 
-    def get_class(self, student: dict) -> str:
+    def get_class(self, student_class_id: int) -> str:
         classes = self.edupage.get_classes()
         for class_ in classes:
-            if class_.class_id == student['CLASS_ID']:
+            if class_.class_id == student_class_id:
                 return class_.name
             
 
