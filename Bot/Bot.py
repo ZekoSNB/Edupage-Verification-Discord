@@ -21,6 +21,7 @@ class Bot():
         self.client.event(self.on_member_join)
         self.client.event(self.on_message)
         self.client.run(self.get_token())
+        
 
 
     #get needed information from .json
@@ -65,11 +66,14 @@ class Bot():
             print(f'{message.author} sent a message: {message.content}, {len(message.attachments)} attachments available')
             await message.channel.send(f"Sprava '{message.content}' prijata, {len(message.attachments)} obrazkov.")
            
-            #check sent images
-            for attachment in message.attachments:
+           #download images
+            for i,attachment in enumerate(message.attachments):
                 if attachment.content_type and 'image' in attachment.content_type:
                     print(f"Image '{attachment.filename}' is downloading.")
-                    await self.download_image(attachment.url, attachment.filename)
+                    print(attachment.filename, message.author)
+                    filename = f'{str(message.author)}-{i}.{attachment.filename.split('.')[-1]}'
+                    print(filename)
+                    await self.download_image(attachment.url, filename)
                     await message.channel.send(f"Image '{attachment.filename}' has been downloaded.")
 
     #download image
