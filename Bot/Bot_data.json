@@ -1,0 +1,5 @@
+{
+    "WELCOME_MSG" : "Vitaj na serveri Gymnázia VBN. :raising_hand:\nPre overenie :white_check_mark: sem pošli svoje potvrdenie o návšteve školy. :newspaper:\nAk nevieš ako na to:\n\n1. Otvor Edupage. :mortar_board:\n2. Klikni na menu. :gear:\n3. Prejdi na kartu \"Potvrdenie o návšteve školy\". :bookmark:\n4. Zobraziť aktuálne potvrdenie. :eyes:\n(Ak potvrdenie nemáš vygenerované => vygenerovať nové potvrdenie.) :dna:\n5. Urob screenshot a pošli ho sem pošli sem. :camera_with_flash:\n:bangbang: :warning: (Daj pozor aby QR kód bol čitateľný.) :warning: :bangbang:",
+    "PC_IMG"     : "EduTPC.jpeg",
+    "MOBILE_IMG" : "EduTMP.jpeg"
+}

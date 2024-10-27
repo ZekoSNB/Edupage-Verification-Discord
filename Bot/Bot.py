@@ -1,10 +1,12 @@
 import discord
+import os
 import json
 
 
 class Bot():
-
     def __init__(self):
+        self.BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
+        self.bot_data = self.get_bot_data()
         intents = discord.Intents.default()
         intents.members = True
         intents.message_content = True
@@ -13,32 +15,29 @@ class Bot():
         self.client.event(self.on_member_join)
         self.client.run(self.get_token())
 
+    def get_bot_data(self):
+        with open(os.path.join(self.BASE_DIR, 'Bot', 'Bot_data.json'), 'r') as file:
+            return json.load(file)
+
     def get_token(self):
-        with open('/home/samino/Documents/Edupage-Verification-Discord/data/data.json', 'r') as file:
+        file_path = os.path.join(self.BASE_DIR, 'data', 'data.json')
+        with open(file_path, 'r') as file:
             return json.load(file)['BOT_TOKEN']
-        
-    def get_welcome_msg(self):
-        with open('/home/samino/Documents/Edupage-Verification-Discord/Bot/msgs.json', 'r') as file:
-            return json.load(file)['WELLCOME_MSG']
-        
-    def get_imgs(self, x):
-        if x == 1:
-            return('/home/samino/Documents/Edupage-Verification-Discord/Bot/EduTMP.jpeg')
-        elif x == 0:
-            return('/home/samino/Documents/Edupage-Verification-Discord/Bot/EduTPC.jpeg')
     
     async def on_ready(self):
         print(f'We have logged in as {self.client.user}')
 
     async def on_member_join(self, member):
-        WELCOME_MSG = self.get_welcome_msg()
+
+        WELCOME_MSG = self.bot_data['WELCOME_MSG']
         PC_MSG = "Ak overenie robíš na PC/Laptope: :computer:"
         MOBILE_MSG = "Ak overenie robíš na mobile: :iphone:"
+        PC_IMG = os.path.join(self.BASE_DIR, 'Bot', self.bot_data['PC_IMG'])
+        MOBILE_IMG = os.path.join(self.BASE_DIR, 'Bot', self.bot_data['MOBILE_IMG'])
+
         print(f"Sending message to {member}...")
         try:
-            await member.send(f"{WELCOME_MSG} \n\n {PC_MSG}", file = discord.File(self.get_imgs(0))) 
-            await member.send(f"{MOBILE_MSG}", file = discord.File(self.get_imgs(1)))
-            print(f"Message sent to {member}")
+            await member.send(f"{WELCOME_MSG} \n\n {PC_MSG} \n {MOBILE_MSG}" , files = [discord.File(PC_IMG), discord.File(MOBILE_IMG)])
         except discord.Forbidden:
             print(f'Could not send a message to {member}')
         except Exception as e:
