@@ -1,6 +1,4 @@
 opencv-python
-os
 discord
-json
 edupage-api
 selenium

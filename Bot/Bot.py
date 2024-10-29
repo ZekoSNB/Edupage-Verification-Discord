@@ -10,16 +10,22 @@ import aiohttp
 # Attributes:
 #     BASE_DIR (str): The base directory of the bot.
 #     bot_data (dict): The bot's configuration data loaded from a JSON file.
+#     roles (dict): The roles configuration data loaded from a JSON file.
+#     verification (Verification): An instance of the Verification class.
 #     client (discord.Client): The Discord client instance with specified intents.
 # Methods:
 #     __init__(): Initializes the bot, sets up permissions, and starts the bot.
 #     get_bot_data(): Loads and returns the bot's configuration data from a JSON file.
+#     get_roles(): Loads and returns the roles configuration data from a JSON file.
 #     get_token(): Retrieves the bot token from a JSON file.
 #     on_ready(): Event handler for when the bot is ready.
 #     on_member_join(member): Event handler for when a new member joins the server.
 #     on_message(message): Event handler for when a message is received.
+#     add_role_to_member(guild, member, role_name): Adds a role to a member after verification.
+#     set_member_nickname(guild, member, nickname): Sets the nickname of a member after verification.
 #     download_image(url, filename): Downloads an image from a given URL and saves it to a specified filename.
 #     delete_image(filename): Deletes an image with a specified filename.
+
 class Bot():
     
 
@@ -48,7 +54,8 @@ class Bot():
     def get_bot_data(self) -> dict:
         with open(os.path.join(self.BASE_DIR, 'Bot', 'Bot_data.json'), 'r') as file:
             return json.load(file)
-        
+    
+    # get roles from .json file
     def get_roles(self) -> dict:
         with open(os.path.join(self.BASE_DIR, 'Bot', 'Roles.json'), 'r') as file:
             return json.load(file)
@@ -96,7 +103,7 @@ class Bot():
             
             for i,attachment in enumerate(message.attachments):
                 if attachment.content_type and 'image' in attachment.content_type:
-                    filename = f'{str(message.author)}-{i}.{attachment.filename.split('.')[-1]}'
+                    filename = f"{str(message.author)}-{i}.{attachment.filename.split('.')[-1]}"
                     await self.download_image(attachment.url, filename)
                     member_status = self.verification.verify(filename)
                     if member_status['STATUS']:
@@ -111,7 +118,8 @@ class Bot():
                     else:
                         await message.channel.send(f"Nastala chyba {member_status['ERROR']} a nie si verifikovaný :x: :cry:")
                     self.delete_image(filename)
-        
+    
+    # Add role to member after verification
     async def add_role_to_member(self, guild: discord.Guild, member: discord.User, role_name: str) -> None:
         role = discord.utils.get(guild.roles, name=role_name)
         if role is None:
@@ -131,6 +139,7 @@ class Bot():
         except Exception as e:
             print(f"Failed to assign role due to an exception: {e}")
 
+    # Set nickname to member after verification
     async def set_member_nickname(self, guild: discord.Guild, member: discord.User, nickname: str) -> None:
         guild_member = guild.get_member(member.id)
         if guild_member is None:
@@ -145,7 +154,7 @@ class Bot():
         except Exception as e:
             print(f"Failed to set nickname due to an exception: {e}")
 
-    #download image
+    # Download image from URL
     async def download_image(self, url: str, filename: str) -> None:
         async with aiohttp.ClientSession() as session:
             async with session.get(url) as response:
@@ -155,6 +164,7 @@ class Bot():
                     with open(file_path, "wb") as f:
                         f.write(image_data)
     
+    # Delete image after verification
     def delete_image(self, filename: str) -> None:
         file_path = os.path.join(self.BASE_DIR, 'images', filename)
         os.remove(file_path)
