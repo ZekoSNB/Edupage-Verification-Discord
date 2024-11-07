@@ -1,5 +1,16 @@
 import cv2
 
+
+# A class to handle QR code reading and processing using OpenCV.
+# Methods:
+# --------
+# __init__() -> None
+#     Initializes the Qrcode class.
+# read(filename: str = None) -> str
+#     Reads a QR code from the given image file and returns the decoded data as a string.
+# invert_image(image: str) -> str
+#     Inverts the colors of the given image and returns the inverted image.
+
 class Qrcode():
     def __init__(self):
         pass        

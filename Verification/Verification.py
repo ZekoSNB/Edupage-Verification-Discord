@@ -6,6 +6,25 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 import re, os, json
 
+ 
+# A class to handle the verification of student data using QR codes and Edupage API.
+# Attributes:
+# -----------
+# BASE_DIR : str
+#     The base directory path of the project.
+# edu_data : dict
+#     The educational data containing login credentials.
+# edu : Edu
+#     An instance of the Edu class used to interact with the Edupage API.
+# Methods:
+# --------
+# __init__() -> None
+#     Initializes the Verification class, sets the base directory, retrieves educational data, and initializes the Edu instance.
+# verify(image: str) -> dict
+#     Verifies the student data by reading a QR code from the given image and checking it against the Edupage system.
+# verify_web(url: str) -> dict
+#     Verifies the student data by fetching information from the provided URL.
+
 
 class Verification():
 
