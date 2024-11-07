@@ -1,8 +1,5 @@
 from Verification.Verification import Verification
-import discord
-import os
-import json
-import aiohttp
+import discord, os, json, aiohttp, logging
 
 
 
@@ -47,6 +44,14 @@ class Bot():
         self.client.event(self.on_member_join)
         self.client.event(self.on_message)
         self.client.run(self.get_token())
+        self.logging.basicConfig(
+            level=logging.DEBUG,  # Log all levels from DEBUG and above
+            format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+            handlers=[
+                logging.FileHandler(os.path.joing(self.BASE_DIR, "debug.log")),  # Log to a file called bot.log
+                logging.StreamHandler()          # Also log to the console
+            ]
+        )
         
 
 
@@ -69,7 +74,8 @@ class Bot():
     
     #check if bot is online
     async def on_ready(self) -> None:
-        print(f'We have logged in as {self.client.user}')
+        self.logger = logging.getLogger("discord_bot")
+        self.logger.info(f'We have logged in as {self.client.user}')
 
     #detect member join and send welcome mesage
     async def on_member_join(self, member: discord.Member) -> None:
@@ -82,10 +88,10 @@ class Bot():
             await member.send(f"{WELCOME_MSG} \n\n {PC_MSG} \n {MOBILE_MSG}" , files = [discord.File(PC_IMG), discord.File(MOBILE_IMG)])
 
         except discord.Forbidden:
-            print(f'Could not send a message to {member}')
+            self.logger.error(f'Could not send a message to {member}')
 
         except Exception as e:
-            print(f'An error occured: {e}') 
+            self.logger.error(f'An error occured: {e}')
 
     #detect message receive
     async def on_message(self, message: discord.Message) -> None:
@@ -117,42 +123,43 @@ class Bot():
 
                     else:
                         await message.channel.send(f"Nastala chyba {member_status['ERROR']} a nie si verifikovaný :x: :cry:")
+                        self.logger.error(f"Verification failed for {message.author}: {member_status['ERROR']}")
                     self.delete_image(filename)
     
     # Add role to member after verification
     async def add_role_to_member(self, guild: discord.Guild, member: discord.User, role_name: str) -> None:
         role = discord.utils.get(guild.roles, name=role_name)
         if role is None:
-            print(f"Role '{role_name}' not found.")
+            self.logger.error(f"Role '{role_name}' not found.")
             return
         
         guild_member = guild.get_member(member.id)
         if guild_member is None:
-            print(f"User {member} not found in the guild.")
+            self.logger.error(f"User {member} not found in the guild.")
             return
 
         try:
             await guild_member.add_roles(role)
 
         except discord.Forbidden:
-            print("Bot does not have permission to assign roles.")
+            self.logger.error("Bot does not have permission to assign roles.")
         except Exception as e:
-            print(f"Failed to assign role due to an exception: {e}")
+            self.logger.error(f"Failed to assign role due to an exception: {e}")
 
     # Set nickname to member after verification
     async def set_member_nickname(self, guild: discord.Guild, member: discord.User, nickname: str) -> None:
         guild_member = guild.get_member(member.id)
         if guild_member is None:
-            print(f"User {member} not found in the guild.")
+            self.logger.error(f"User {member} not found in the guild.")
             return
 
         try:
             await guild_member.edit(nick=nickname)
 
         except discord.Forbidden:
-            print("Bot does not have permission to manage nicknames.")
+            self.logger.error("Bot does not have permission to manage nicknames.")
         except Exception as e:
-            print(f"Failed to set nickname due to an exception: {e}")
+            self.logger.error(f"Failed to set nickname due to an exception: {e}")
 
     # Download image from URL
     async def download_image(self, url: str, filename: str) -> None:

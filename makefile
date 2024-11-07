@@ -1,7 +1,7 @@
 all:
 
 run:
-	@python bot.py
+	@python3 bot.py
 
 clean:
 	find . -type f -name "*.pyc" -exec rm -f {} \;
