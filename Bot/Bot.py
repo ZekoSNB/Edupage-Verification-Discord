@@ -33,6 +33,19 @@ class Bot():
         self.roles = self.get_roles()
         self.verification = Verification()
 
+        #setting up logging
+        print(self.BASE_DIR)
+        logging.basicConfig(
+            level=logging.DEBUG,  # Log all levels from DEBUG and above
+            format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+            handlers=[
+                logging.FileHandler(os.path.join(self.BASE_DIR, "debug.log")),  # Log to a file called bot.log
+                logging.StreamHandler()          # Also log to the console
+            ]
+        )
+
+        self.logger = logging.getLogger("discord_bot")
+
         #giving bot permissions
         intents = discord.Intents.default()
         intents.members = True
@@ -44,14 +57,7 @@ class Bot():
         self.client.event(self.on_member_join)
         self.client.event(self.on_message)
         self.client.run(self.get_token())
-        self.logging.basicConfig(
-            level=logging.DEBUG,  # Log all levels from DEBUG and above
-            format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-            handlers=[
-                logging.FileHandler(os.path.joing(self.BASE_DIR, "debug.log")),  # Log to a file called bot.log
-                logging.StreamHandler()          # Also log to the console
-            ]
-        )
+        
         
 
 
@@ -117,9 +123,11 @@ class Bot():
 
                         # Add role after verification
                         guild = discord.utils.get(self.client.guilds)
-                        await self.add_role_to_member(guild, message.author, self.roles[member_status['CLASS']])
+                        # await self.add_role_to_member(guild, message.author, self.roles[member_status['CLASS']])
+                        await self.add_role_to_member(guild, message.author, self.roles['VERIFIED'])
                         # Set nickname after verification
                         await self.set_member_nickname(guild, message.author, member_status['NAME'])
+                        self.logger.info(f"Verification successful for {message.author}: {member_status['NAME']}, {member_status['CLASS']}, {member_status['STATUS']}")
 
                     else:
                         await message.channel.send(f"Nastala chyba {member_status['ERROR']} a nie si verifikovaný :x: :cry:")

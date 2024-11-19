@@ -4,9 +4,13 @@ import time, traceback
 
 
 if __name__ == "__main__":
-    try:
-        print("Bot starting......")
-        main()
-    except Exception as e:
-        print("Bot encountered an error and will restart", exc_info=e)
-        time.sleep(5)
+    while True:
+        try:
+            print("Bot starting......")
+            main()
+        except KeyboardInterrupt:
+            print("Bot shutting down")
+            break
+        except Exception as e:
+            print("Bot encountered an error and will restart", e)
+            time.sleep(5)
