@@ -9,42 +9,21 @@ Edupage Verifikácia v Discorde je Discord bot navrhnutý na automatizáciu proc
 - **Priraďovanie rolí podľa ročníka**: Automatické priraďovanie rolí na základe ročníka študenta, čo zaručuje správne kategorizovanie všetkých členov na serveri.
 - **Bezpečné overenie**: Využíva bezpečnostný systém potvrdení Edupage na zabezpečenie študentskej identity.
 
-## Obsah
-
-- [Inštalácia](#Inštalácia)
-- [Konfigurácia](#Konfigurácia)
-- [Použitie](#Použitie)
-- [Licencia](#Licencia)
-- [Poďakovanie](#Poďakovanie)
 
 ## Inštalácia
 
 ### Predpoklady
-
 1. **Python 3.8+**
 2. **Knižnica Discord.py**
-3. **Prístup k API Edupage** (alebo obdobný systém overenia školy)
-   
-### Konfigurácia
+3. **Prístup k API Edupage**
 
-1. Klonujte repozitár:
-   ```bash
-   git clone https://github.com/yourusername/edupage-verification-discord.git
-   cd edupage-verification-discord```
+# O projekte
+Tento projekt vznikol ako odpoveď na potrebu efektívnejšieho a bezpečnejšieho spôsobu overovania študentských identít na Discord serveroch. S rastúcim počtom online komunít pre študentov a pedagógov je dôležité mať nástroje, ktoré zjednodušujú správu a zaručujú bezpečnosť. Edupage Verifikácia v Discorde je open-source projekt, ktorý je k dispozícii na GitHub-e a je neustále vylepšovaný komunitou.
 
-2. Nainštalujte potrebné knižnice
-  ```bash
-  pip install -r requirements.txt
-  ```
-3. Nastavte Konfiguračné súbory
-- ```Bot/Bot_data.json```: Tu vkladáte vlastné správy
+## Prispievanie
 
-### Použitie
-1. ```python bot.py```
-2. Bot automaticky počúva na pripojenie nových členov a vyzve ich na dokončenie procesu overenia pomocou potvrdenia z Edupage.
+Ak máte záujem prispieť k tomuto projektu, neváhajte vytvoriť pull request alebo nahlásiť problémy v sekcii Issues na GitHub-e. Vaša pomoc je vítaná!
 
 ## Licencia
-Distribuované pod licenciou GPL v3.0 . Viac informácií nájdete v súbore LICENSE.
 
-## Poďakovanie
-Špeciálne poďakovanie patrí Edupage za poskytovanie systému overovania a všetkým prispievateľom, ktorí pomáhajú vylepšovať tento projekt.
+Tento projekt je licencovaný pod MIT licenciou. Viac informácií nájdete v súbore LICENSE.

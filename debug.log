@@ -1,0 +1,102 @@
+2024-12-04 15:16:20,088 - discord.client - WARNING - PyNaCl is not installed, voice will NOT be supported
+2024-12-04 15:16:20,088 - discord.client - DEBUG - on_ready has successfully been registered as an event
+2024-12-04 15:16:20,088 - discord.client - DEBUG - on_member_join has successfully been registered as an event
+2024-12-04 15:16:20,088 - discord.client - DEBUG - on_message has successfully been registered as an event
+2024-12-04 15:16:20,089 - asyncio - DEBUG - Using selector: KqueueSelector
+2024-12-04 15:16:20,089 - discord.client - INFO - logging in using static token
+2024-12-04 15:16:21,205 - discord.gateway - INFO - Shard ID None has connected to Gateway (Session ID: 3a95a0e191bab9a609d51210c5ff5379).
+2024-12-04 15:16:23,217 - discord_bot - INFO - We have logged in as Edu Verification#5097
+2024-12-04 15:17:22,468 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): gympd.edupage.org:443
+2024-12-04 15:17:22,594 - urllib3.connectionpool - DEBUG - https://gympd.edupage.org:443 "GET /login/index.php HTTP/11" 200 None
+2024-12-04 15:17:22,689 - urllib3.connectionpool - DEBUG - https://gympd.edupage.org:443 "POST /login/edubarLogin.php HTTP/11" 302 None
+2024-12-04 15:17:23,180 - urllib3.connectionpool - DEBUG - https://gympd.edupage.org:443 "GET /user/ HTTP/11" 200 None
+2024-12-04 15:17:23,313 - asyncio - DEBUG - Using selector: KqueueSelector
+2024-12-04 15:17:23,314 - discord.client - INFO - logging in using static token
+2024-12-04 15:17:24,370 - discord.gateway - INFO - Shard ID None has connected to Gateway (Session ID: 5721aadbd97c218bda98297940252e12).
+2024-12-04 15:17:25,463 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): gympd.edupage.org:443
+2024-12-04 15:17:25,620 - urllib3.connectionpool - DEBUG - https://gympd.edupage.org:443 "GET /login/index.php HTTP/11" 200 None
+2024-12-04 15:17:25,707 - urllib3.connectionpool - DEBUG - https://gympd.edupage.org:443 "POST /login/edubarLogin.php HTTP/11" 302 None
+2024-12-04 15:20:08,103 - discord.client - WARNING - PyNaCl is not installed, voice will NOT be supported
+2024-12-04 15:20:08,103 - discord.client - DEBUG - on_ready has successfully been registered as an event
+2024-12-04 15:20:08,103 - discord.client - DEBUG - on_member_join has successfully been registered as an event
+2024-12-04 15:20:08,103 - discord.client - DEBUG - on_message has successfully been registered as an event
+2024-12-04 15:20:08,104 - asyncio - DEBUG - Using selector: KqueueSelector
+2024-12-04 15:20:08,104 - discord.client - INFO - logging in using static token
+2024-12-04 15:20:09,370 - discord.gateway - INFO - Shard ID None has connected to Gateway (Session ID: 4f24912405d21cbef1a594f433bf8ef0).
+2024-12-04 15:20:11,417 - discord_bot - INFO - We have logged in as Edu Verification#5097
+2024-12-04 15:20:39,474 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): gympd.edupage.org:443
+2024-12-04 15:20:39,600 - urllib3.connectionpool - DEBUG - https://gympd.edupage.org:443 "GET /login/index.php HTTP/11" 200 None
+2024-12-04 15:24:23,700 - discord.client - WARNING - PyNaCl is not installed, voice will NOT be supported
+2024-12-04 15:24:23,701 - discord.client - DEBUG - on_ready has successfully been registered as an event
+2024-12-04 15:24:23,701 - discord.client - DEBUG - on_member_join has successfully been registered as an event
+2024-12-04 15:24:23,701 - discord.client - DEBUG - on_message has successfully been registered as an event
+2024-12-04 15:24:23,701 - asyncio - DEBUG - Using selector: KqueueSelector
+2024-12-04 15:24:23,701 - discord.client - INFO - logging in using static token
+2024-12-04 15:24:24,825 - discord.gateway - INFO - Shard ID None has connected to Gateway (Session ID: 1de6ffe3a57f2657b2b49bb14c221bc7).
+2024-12-04 15:24:26,837 - discord_bot - INFO - We have logged in as Edu Verification#5097
+2024-12-04 15:25:42,655 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): gympd.edupage.org:443
+2024-12-04 15:25:42,787 - urllib3.connectionpool - DEBUG - https://gympd.edupage.org:443 "GET /login/index.php HTTP/11" 200 None
+2024-12-04 15:25:45,699 - discord.client - WARNING - PyNaCl is not installed, voice will NOT be supported
+2024-12-04 15:25:45,699 - discord.client - DEBUG - on_ready has successfully been registered as an event
+2024-12-04 15:25:45,699 - discord.client - DEBUG - on_member_join has successfully been registered as an event
+2024-12-04 15:25:45,699 - discord.client - DEBUG - on_message has successfully been registered as an event
+2024-12-04 15:25:45,699 - asyncio - DEBUG - Using selector: KqueueSelector
+2024-12-04 15:25:45,700 - discord.client - INFO - logging in using static token
+2024-12-04 15:25:47,365 - discord.gateway - INFO - Shard ID None has connected to Gateway (Session ID: 199b38fd7c308292d0d1a85ebe899962).
+2024-12-04 15:25:49,377 - discord_bot - INFO - We have logged in as Edu Verification#5097
+2024-12-04 15:26:35,934 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): gympd.edupage.org:443
+2024-12-04 15:26:36,062 - urllib3.connectionpool - DEBUG - https://gympd.edupage.org:443 "GET /login/index.php HTTP/11" 200 None
+2024-12-04 15:26:36,212 - urllib3.connectionpool - DEBUG - https://gympd.edupage.org:443 "POST /login/edubarLogin.php HTTP/11" 302 None
+2024-12-04 15:26:39,380 - discord.client - WARNING - PyNaCl is not installed, voice will NOT be supported
+2024-12-04 15:26:39,381 - discord.client - DEBUG - on_ready has successfully been registered as an event
+2024-12-04 15:26:39,381 - discord.client - DEBUG - on_member_join has successfully been registered as an event
+2024-12-04 15:26:39,381 - discord.client - DEBUG - on_message has successfully been registered as an event
+2024-12-04 15:26:39,381 - asyncio - DEBUG - Using selector: KqueueSelector
+2024-12-04 15:26:39,381 - discord.client - INFO - logging in using static token
+2024-12-04 15:26:40,589 - discord.gateway - INFO - Shard ID None has connected to Gateway (Session ID: 3cb91b94b66ea551a9a1fc72fafdc2f2).
+2024-12-04 15:26:42,607 - discord_bot - INFO - We have logged in as Edu Verification#5097
+2024-12-04 15:29:10,818 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): gympd.edupage.org:443
+2024-12-04 15:29:10,964 - urllib3.connectionpool - DEBUG - https://gympd.edupage.org:443 "GET /login/index.php HTTP/11" 200 None
+2024-12-04 15:29:11,046 - urllib3.connectionpool - DEBUG - https://gympd.edupage.org:443 "POST /login/edubarLogin.php HTTP/11" 302 None
+2024-12-04 15:29:13,698 - discord.client - WARNING - PyNaCl is not installed, voice will NOT be supported
+2024-12-04 15:29:13,698 - discord.client - DEBUG - on_ready has successfully been registered as an event
+2024-12-04 15:29:13,698 - discord.client - DEBUG - on_member_join has successfully been registered as an event
+2024-12-04 15:29:13,698 - discord.client - DEBUG - on_message has successfully been registered as an event
+2024-12-04 15:29:13,698 - asyncio - DEBUG - Using selector: KqueueSelector
+2024-12-04 15:29:13,698 - discord.client - INFO - logging in using static token
+2024-12-04 15:29:15,117 - discord.gateway - INFO - Shard ID None has connected to Gateway (Session ID: 130413cb13b5cb4d51d7164f68839269).
+2024-12-04 15:29:17,132 - discord_bot - INFO - We have logged in as Edu Verification#5097
+2024-12-04 15:29:34,924 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): gympd.edupage.org:443
+2024-12-04 15:29:35,049 - urllib3.connectionpool - DEBUG - https://gympd.edupage.org:443 "GET /login/index.php HTTP/11" 200 None
+2024-12-04 15:29:35,131 - urllib3.connectionpool - DEBUG - https://gympd.edupage.org:443 "POST /login/edubarLogin.php HTTP/11" 302 None
+2024-12-04 15:29:37,246 - discord.client - WARNING - PyNaCl is not installed, voice will NOT be supported
+2024-12-04 15:29:37,247 - discord.client - DEBUG - on_ready has successfully been registered as an event
+2024-12-04 15:29:37,247 - discord.client - DEBUG - on_member_join has successfully been registered as an event
+2024-12-04 15:29:37,247 - discord.client - DEBUG - on_message has successfully been registered as an event
+2024-12-04 15:29:37,247 - asyncio - DEBUG - Using selector: KqueueSelector
+2024-12-04 15:29:37,247 - discord.client - INFO - logging in using static token
+2024-12-04 15:29:38,573 - discord.gateway - INFO - Shard ID None has connected to Gateway (Session ID: 4c6efd269871aaaf0c60f8bf5321e80d).
+2024-12-04 15:29:40,591 - discord_bot - INFO - We have logged in as Edu Verification#5097
+2024-12-04 15:30:06,935 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): gympd.edupage.org:443
+2024-12-04 15:30:07,060 - urllib3.connectionpool - DEBUG - https://gympd.edupage.org:443 "GET /login/index.php HTTP/11" 200 None
+2024-12-04 15:30:08,988 - discord.client - WARNING - PyNaCl is not installed, voice will NOT be supported
+2024-12-04 15:30:08,988 - discord.client - DEBUG - on_ready has successfully been registered as an event
+2024-12-04 15:30:08,988 - discord.client - DEBUG - on_member_join has successfully been registered as an event
+2024-12-04 15:30:08,988 - discord.client - DEBUG - on_message has successfully been registered as an event
+2024-12-04 15:30:08,989 - asyncio - DEBUG - Using selector: KqueueSelector
+2024-12-04 15:30:08,989 - discord.client - INFO - logging in using static token
+2024-12-04 15:30:10,161 - discord.gateway - INFO - Shard ID None has connected to Gateway (Session ID: 6fd2ead8ccd8a3da6c81d6ce1e2b83c5).
+2024-12-04 15:30:12,183 - discord_bot - INFO - We have logged in as Edu Verification#5097
+2024-12-04 15:30:28,621 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): gympd.edupage.org:443
+2024-12-04 15:30:28,772 - urllib3.connectionpool - DEBUG - https://gympd.edupage.org:443 "GET /login/index.php HTTP/11" 200 None
+2024-12-04 15:30:30,605 - discord.client - WARNING - PyNaCl is not installed, voice will NOT be supported
+2024-12-04 15:30:30,605 - discord.client - DEBUG - on_ready has successfully been registered as an event
+2024-12-04 15:30:30,606 - discord.client - DEBUG - on_member_join has successfully been registered as an event
+2024-12-04 15:30:30,606 - discord.client - DEBUG - on_message has successfully been registered as an event
+2024-12-04 15:30:30,606 - asyncio - DEBUG - Using selector: KqueueSelector
+2024-12-04 15:30:30,606 - discord.client - INFO - logging in using static token
+2024-12-04 15:30:31,828 - discord.gateway - INFO - Shard ID None has connected to Gateway (Session ID: 0ae417fc354b23abc4a559f7ced09ab9).
+2024-12-04 15:30:33,841 - discord_bot - INFO - We have logged in as Edu Verification#5097
+2024-12-04 15:34:14,879 - urllib3.connectionpool - DEBUG - Starting new HTTPS connection (1): gympd.edupage.org:443
+2024-12-04 15:34:15,005 - urllib3.connectionpool - DEBUG - https://gympd.edupage.org:443 "GET /login/index.php HTTP/11" 200 None
+2024-12-04 15:34:15,095 - urllib3.connectionpool - DEBUG - https://gympd.edupage.org:443 "POST /login/edubarLogin.php HTTP/11" 302 None

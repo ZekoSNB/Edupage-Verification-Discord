@@ -104,9 +104,16 @@ class Bot():
         if message.author == self.client.user:
             return
 
+        if message.content.startswith('$test'):
+            await message.channel.send(f'Ahoj {message.author}, som funkčný a pripravený do služby! :)')
+            return
+        
+        if str(message.author) == "_zeko_07":
+            await message.channel.send("Ahoj šéfe! :wave:")
+
         #check if DM attachment
         if isinstance(message.channel, discord.DMChannel) and message.attachments:
-            await message.channel.send(f"Sprava prijata, overujem...")
+            await message.channel.send("Sprava prijatá, overujem tvoju totožnosť...")
 
             #download images
             if len(message.attachments) > 1:
@@ -133,6 +140,9 @@ class Bot():
                         await message.channel.send(f"Nastala chyba {member_status['ERROR']} a nie si verifikovaný :x: :cry:")
                         self.logger.error(f"Verification failed for {message.author}: {member_status['ERROR']}")
                     self.delete_image(filename)
+        else:
+            await message.channel.send("Sprava prijatá, ale neobsahuje fotku :x:")
+            return
     
     # Add role to member after verification
     async def add_role_to_member(self, guild: discord.Guild, member: discord.User, role_name: str) -> None:
