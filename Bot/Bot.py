@@ -101,6 +101,9 @@ class Bot():
 
     #detect message receive
     async def on_message(self, message: discord.Message) -> None:
+        if isinstance(message.channel, discord.DMChannel):
+            return
+
         if message.author == self.client.user:
             return
 
@@ -112,7 +115,7 @@ class Bot():
             await message.channel.send("Ahoj šéfe! :wave:")
 
         #check if DM attachment
-        if isinstance(message.channel, discord.DMChannel) and message.attachments:
+        if message.attachments:
             await message.channel.send("Sprava prijatá, overujem tvoju totožnosť...")
 
             #download images
