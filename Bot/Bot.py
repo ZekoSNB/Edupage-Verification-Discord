@@ -101,53 +101,42 @@ class Bot():
 
     #detect message receive
     async def on_message(self, message: discord.Message) -> None:
-        if isinstance(message.channel, discord.DMChannel):
-            return
-
-        if message.author == self.client.user:
+        if not isinstance(message.channel, discord.DMChannel) or message.author == self.client.user:
             return
 
         if message.content.startswith('$test'):
             await message.channel.send(f'Ahoj {message.author}, som funkčný a pripravený do služby! :)')
             return
-        
-        if str(message.author) == "_zeko_07":
-            await message.channel.send("Ahoj šéfe! :wave:")
 
-        #check if DM attachment
-        if message.attachments:
-            await message.channel.send("Sprava prijatá, overujem tvoju totožnosť...")
-
-            #download images
-            if len(message.attachments) > 1:
-                await message.channel.send("Posielaj len jednu fotku naraz :x:")
-                return
-            
-            for i,attachment in enumerate(message.attachments):
-                if attachment.content_type and 'image' in attachment.content_type:
-                    filename = f"{str(message.author)}-{i}.{attachment.filename.split('.')[-1]}"
-                    await self.download_image(attachment.url, filename)
-                    member_status = self.verification.verify(filename)
-                    if member_status['STATUS']:
-                        await message.channel.send(f"Člen {member_status['NAME']} je študentom a si verifikovaný. :white_check_mark:")
-
-                        # Add role after verification
-                        guild = discord.utils.get(self.client.guilds)
-                        # await self.add_role_to_member(guild, message.author, self.roles[member_status['CLASS']])
-                        await self.add_role_to_member(guild, message.author, self.roles['VERIFIED'])
-                        # Set nickname after verification
-                        await self.set_member_nickname(guild, message.author, member_status['NAME'])
-                        self.logger.info(f"Verification successful for {message.author}: {member_status['NAME']}, {member_status['CLASS']}, {member_status['STATUS']}")
-
-                    else:
-                        await message.channel.send(f"Nastala chyba {member_status['ERROR']} a nie si verifikovaný :x: :cry:")
-                        self.logger.error(f"Verification failed for {message.author}: {member_status['ERROR']}")
-                    self.delete_image(filename)
-        else:
+        if not message.attachments:
             await message.channel.send("Sprava prijatá, ale neobsahuje fotku :x:")
             return
+        
+        await message.channel.send("Sprava prijatá, overujem tvoju totožnosť...")
+
+        if len(message.attachments) > 1:
+            await message.channel.send("Posielaj len jednu fotku naraz :x:")
+            return
+        
+        for i,attachment in enumerate(message.attachments):
+            if attachment.content_type and 'image' in attachment.content_type:
+
+                filename = f"{str(message.author)}-{i}.{attachment.filename.split('.')[-1]}"
+                await self.download_image(attachment.url, filename)
+                member_status = self.verification.verify(filename)
+
+                if member_status['STATUS']:
+                    await message.channel.send(f"Člen {member_status['NAME']} je študentom a si verifikovaný. :white_check_mark:")
+                    guild = discord.utils.get(self.client.guilds)
+                    await self.add_role_to_member(guild, message.author, self.roles['VERIFIED'])
+                    await self.set_member_nickname(guild, message.author, member_status['NAME'])
+                    self.logger.info(f"Verification successful for {message.author}: {member_status['NAME']}, {member_status['CLASS']}, {member_status['STATUS']}")
+
+                else:
+                    await message.channel.send(f"Nastala chyba {member_status['ERROR']} a nie si verifikovaný :x: :cry:")
+                    self.logger.error(f"Verification failed for {message.author}: {member_status['ERROR']}")
+                self.delete_image(filename)
     
-    # Add role to member after verification
     async def add_role_to_member(self, guild: discord.Guild, member: discord.User, role_name: str) -> None:
         role = discord.utils.get(guild.roles, name=role_name)
         if role is None:
